@@ -1,16 +1,25 @@
-#include <iostream>
+// max3 returns the max of 3 numbers
 
-using namespace std;
+// start with int only, the first step:
+int max3(int a, int b, int c) {
+        // simply:      int max = (a>b)?a:b;
+        // and:         return (max>c)?max:c; 
+        int max = a;
+        if (max < b)
+                max = b;
+        if (max < c)
+                max = c;
+        return max;
+}
 
-// the first step, int only
-// int max2(int a, int b) { return a>b?a:b;}
-// int max3(int a, int b, int c) {return max2(max2(a,b), c);}
+// int max2(int a, int b) { return a>b?a:b; }
+// int max3(int a, int b, int c) { return max2(max2(a,b), c); }
 
-// define so flexible, but a double-edged sword (side effect)
+// c-style #define is so flexible, but a double-edged sword (side effect)
 // #define max2(a,b)    a>=b?a:b
 // #define max3(a,b,c)  (max2(max2(a, b), c))
 
-// better, but with the unwanted max2
+// let's do other types, still with the unwanted max2
 // auto max2(auto a, auto b) { return a>b?a:b; }
 // auto max3(auto a, auto b, auto c) { return max2(max2(a,b),c); }
 
@@ -20,6 +29,8 @@ auto max3 = [](auto a, auto b, auto c) {
         return max2(max2(a,b),c);
 };
 
+#include <iostream>
+using namespace std;
 
 int main() {
         auto a = 6;
