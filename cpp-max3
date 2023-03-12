@@ -1,0 +1,32 @@
+#include <iostream>
+
+using namespace std;
+
+// the first step, int only
+// int max2(int a, int b) { return a>b?a:b;}
+// int max3(int a, int b, int c) {return max2(max2(a,b), c);}
+
+// define so flexible, but a double-edged sword (side effect)
+// #define max2(a,b)    a>=b?a:b
+// #define max3(a,b,c)  (max2(max2(a, b), c))
+
+// better, but with the unwanted max2
+// auto max2(auto a, auto b) { return a>b?a:b; }
+// auto max3(auto a, auto b, auto c) { return max2(max2(a,b),c); }
+
+// the ultimate best one with lambda
+auto max3 = [](auto a, auto b, auto c) {
+        auto max2 = [](auto a, auto b) { return a>b?a:b; };
+        return max2(max2(a,b),c);
+};
+
+
+int main() {
+        auto a = 6;
+        cout << max3(3, 5, a++) << endl;
+        cout << a << endl;
+        cout << max3(a++, 1, 4) << endl;
+        cout << a << endl;
+        cout << max3(3, a++, 1) << endl;
+        cout << a << endl;
+        return 0;
